@@ -29,8 +29,6 @@ export class NoteCreateComponent implements OnInit {
 
   saveNote() {
     this.delta = this.quill.getContents();
-
-    console.log(this.delta);
   }
 
 }

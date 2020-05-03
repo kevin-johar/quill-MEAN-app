@@ -6,15 +6,16 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../../../environments/environment';
+import { Note } from '../../../models/note.model';
 
 export const notesFeatureKey = 'notes';
 
 export interface NotesState {
-  notes
+  notes: Note[];
 }
 
 export const reducers: ActionReducerMap<NotesState> = {
-
+  notes: undefined
 };
 
 
