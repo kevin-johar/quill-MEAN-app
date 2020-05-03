@@ -123,6 +123,11 @@
           }
         }
       }
-    }},
-  "defaultProject": "coding-challenge"
+    }
+  },
+  "defaultProject": "coding-challenge",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": false
+  }
 }
