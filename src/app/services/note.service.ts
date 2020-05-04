@@ -29,14 +29,9 @@ export class NoteService {
   }
 
   getNotes() {
-    this.http.get<{ message: string, notes: any }>(this.serverUrl)
-      .subscribe(
-        (res) => {
-          // console.log(res.message);
-
-          this.notes = res.notes;
-          this.notesSubject.next(res.notes);
-        }
+    return this.http.get<{ message: string, notes: any }>(this.serverUrl)
+      .pipe(
+        map(res => res.notes)
       );
   }
 

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Note } from '../../../models/note.model';
 import { NoteService } from '../../../services/note.service';
+import { select, Store } from '@ngrx/store';
+import { selectAllNotes } from '../store/notes.selectors';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notes-list',
@@ -12,11 +15,13 @@ export class NotesListComponent implements OnInit {
 
   notes$: Observable<Note[]>;
 
-  constructor(private noteService: NoteService) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.noteService.getNotes();
-    this.notes$ = this.noteService.getNotesObservable();
+    this.notes$ = this.store.pipe(
+      select(selectAllNotes),
+      tap((notes) => console.log(notes))
+    );
   }
 
 }

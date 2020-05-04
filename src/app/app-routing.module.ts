@@ -3,12 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotesListComponent } from './components/notes/notes-list/notes-list.component';
 import { NoteEditorComponent } from './components/notes/note-editor/note-editor.component';
 import { NoteViewComponent } from './components/notes/note-view/note-view.component';
+import { NotesResolver } from './components/notes/notes.resolver';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: NotesListComponent
+    component: NotesListComponent,
+    resolve: {
+      notes: NotesResolver
+    }
   },
   {
     path: 'note/:id',
