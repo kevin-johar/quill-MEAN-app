@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { HeaderComponent } from './components/header/header.component';
 import { NotesListComponent } from './components/notes/notes-list/notes-list.component';
-import { NoteCreateComponent } from './components/notes/note-create/note-create.component';
+import { NoteEditorComponent } from './components/notes/note-editor/note-editor.component';
 import { NoteListItemComponent } from './components/notes/note-list-item/note-list-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HeaderComponent,
     NotesListComponent,
-    NoteCreateComponent,
+    NoteEditorComponent,
     NoteListItemComponent
   ],
   imports: [

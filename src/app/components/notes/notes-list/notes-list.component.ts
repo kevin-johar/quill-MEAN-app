@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Note } from '../../../models/note.model';
-import { NoteService } from '../services/note.service';
+import { NoteService } from '../../../services/note.service';
 
 @Component({
   selector: 'app-notes-list',
