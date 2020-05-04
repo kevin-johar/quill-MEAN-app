@@ -19,8 +19,7 @@ export class NotesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.notes$ = this.store.pipe(
-      select(selectAllNotes),
-      tap((notes) => console.log(notes))
+      select(selectAllNotes)
     );
   }
 

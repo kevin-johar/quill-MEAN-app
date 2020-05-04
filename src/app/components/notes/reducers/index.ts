@@ -22,7 +22,19 @@ export const NotesReducer = createReducer(
     (state, action) => adapter.setAll(
       action.notes,
       {...state, notesLoaded: true}
-      )
+    )
+  ),
+  on(
+    NotesActions.deleteNote,
+    (state, action) => adapter.removeOne(action.id, state)
+  ),
+  on(
+    NotesActions.updateNote,
+    (state, action) => adapter.updateOne(action.update, state)
+  ),
+  on(
+    NotesActions.postNote,
+    (state, action) => adapter.addOne(action.note, state)
   )
 );
 

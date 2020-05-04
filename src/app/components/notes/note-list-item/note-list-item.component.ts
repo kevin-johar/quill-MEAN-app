@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NoteService } from '../../../services/note.service';
-import { Observable, Subscription } from 'rxjs';
-import { Note } from '../../../models/note.model';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as NotesActions from '../store/note.actions';
 
 @Component({
   selector: 'app-note-list-item',
@@ -11,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class NoteListItemComponent implements OnInit {
   @Input() note: any;
-  id: any;
+  id: string;
   preview: string;
   delta: any;
 
-  constructor(private noteService: NoteService,
+  constructor(private store: Store,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -33,6 +32,7 @@ export class NoteListItemComponent implements OnInit {
   }
 
   deleteNote() {
-    this.noteService.deleteNote(this.id);
+    this.store.dispatch(NotesActions.deleteNote({id: this.id}));
+    // this.noteService.deleteNote(this.id);
   }
 }

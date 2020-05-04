@@ -1,24 +1,16 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { first, last, map, shareReplay, throttle } from 'rxjs/operators';
+import { first, last, map, shareReplay, tap, throttle } from 'rxjs/operators';
 import { Note } from '../models/note.model';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class NoteService {
   private serverUrl = environment.apiUrl + '/notes/';
-  private notesSubject = new Subject<Note[]>();
-
-  notes: Note[];
 
   constructor(private http: HttpClient,
               private router: Router) {
-  }
-
-  getNotesObservable() {
-    return this.notesSubject.asObservable();
   }
 
   getNote(id: string) {
@@ -35,25 +27,22 @@ export class NoteService {
       );
   }
 
-  updateNote(note: Note) {
+  updateNote(note: Partial<Note>) {
     const id = note.id;
 
-    this.http.put<{ message: string, note: Note }>(this.serverUrl + id, note)
-      .subscribe((res) => {
-        // console.log(res.message);
+    console.log(note);
 
-        this.router.navigate(['']);
-      });
+    return this.http.put<{ message: string, note: Note }>(this.serverUrl + id, note)
+      .pipe(
+        tap(() => this.router.navigate(['']))
+      );
   }
 
   postNote(note: Note) {
-    this.http.post<{ message: string, note: Note }>(this.serverUrl, note)
-      .subscribe(
-        (res) => {
-          // console.log(res.message);
-
-          this.router.navigate(['']);
-        }
+    return this.http.post<{ message: string, note: Note }>(this.serverUrl, note)
+      .pipe(
+        tap((res) => this.router.navigate([''])),
+        map(res => res.note)
       );
   }
 
@@ -62,9 +51,6 @@ export class NoteService {
       .subscribe(
         (res) => {
           // console.log(res.message);
-
-          this.notes = this.notes.filter(note => note.id !== id);
-          this.notesSubject.next(this.notes);
         }
       );
   }

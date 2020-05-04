@@ -3,6 +3,9 @@ import { NoteService } from '../../../services/note.service';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Note } from '../../../models/note.model';
+import { Store } from '@ngrx/store';
+import * as NotesActions from '../store/note.actions';
+import { Update } from '@ngrx/entity';
 
 declare const Quill;
 
@@ -23,6 +26,7 @@ export class NoteEditorComponent implements OnInit {
   noteForm: FormGroup;
 
   constructor(private noteService: NoteService,
+              private store: Store,
               private activatedRoute: ActivatedRoute) {
   }
 
@@ -75,9 +79,14 @@ export class NoteEditorComponent implements OnInit {
 
       // Check mode
       if (this.mode === 'create') {
-        this.noteService.postNote(note);
+        this.store.dispatch(NotesActions.postNote({note}));
       } else if (this.mode === 'edit') {
-        this.noteService.updateNote(note);
+        const update: Update<Note> = {
+          id: note.id,
+          changes: note
+        };
+
+        this.store.dispatch(NotesActions.updateNote({update}));
       }
     } else {
       console.error('Form is invalid!');
