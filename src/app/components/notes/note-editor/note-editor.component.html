@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <!-- SAVE BUTTON -->
+      <!--<div class="d-flex justify-content-end m-2">-->
+      <!--  <button type="submit" class="btn btn-primary" (click)="saveNote()">Save</button>-->
+      <!--</div>-->
+
+      <form [formGroup]="noteForm" (ngSubmit)="saveNote()" class="my-2" >
+        <div class="d-flex justify-content-between">
+          <input type="text"
+                 formControlName="title"
+                 class="form-control"
+                 placeholder="Note title">
+          <span class="mx-2"></span>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+
+      <!-- QUILL CONTAINER -->
+      <div class="editor-container">
+        <!-- QUILL EDITOR -->
+        <div id="editor">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
