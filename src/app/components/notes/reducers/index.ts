@@ -33,7 +33,7 @@ export const NotesReducer = createReducer(
     (state, action) => adapter.updateOne(action.update, state)
   ),
   on(
-    NotesActions.postNote,
+    NotesActions.postNoteCompleted,
     (state, action) => adapter.addOne(action.note, state)
   )
 );
