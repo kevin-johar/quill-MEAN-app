@@ -2,13 +2,21 @@
 const Note = require('../models/note');
 
 exports.getNotes = (req, res, next) => {
-  Post.find()
+  Note.find()
     .then(notes => {
         console.log('GET ALL NOTE: SUCCESS\n')
 
+        const clientReadyNotes = notes.map(note => {
+          return {
+            id: note._id,
+            title: note.title,
+            content: note.content
+          }
+        });
+
         res.status(200).json({
           message: 'Get All Notes: Success',
-          notes: fetchedPosts
+          notes
         });
       }
     )

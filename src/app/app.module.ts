@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { NotesListComponent } from './components/notes/notes-list/notes-list.component';
 import { NoteCreateComponent } from './components/notes/note-create/note-create.component';
 import { NoteListItemComponent } from './components/notes/note-list-item/note-list-item.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NoteListItemComponent } from './components/notes/note-list-item/note-li
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {})
+    HttpClientModule,
+    StoreModule.forRoot({}, {}),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
